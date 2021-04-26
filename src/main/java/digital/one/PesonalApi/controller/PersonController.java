@@ -1,5 +1,6 @@
 package digital.one.PesonalApi.controller;
 
+import digital.one.PesonalApi.entity.Person;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
