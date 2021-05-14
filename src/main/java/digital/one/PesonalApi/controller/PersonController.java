@@ -1,6 +1,7 @@
 package digital.one.PesonalApi.controller;
 
 import digital.one.PesonalApi.dto.MessageResponseDTO;
+import digital.one.PesonalApi.dto.request.PersonDTO;
 import digital.one.PesonalApi.entity.Person;
 import digital.one.PesonalApi.repository.PersonRepository;
 import digital.one.PesonalApi.service.PersonService;
@@ -19,7 +20,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody Person person) {
-        return this.personService.createPerson(person);
+    public MessageResponseDTO createPerson(@RequestBody PersonDTO personDTO) {
+        return this.personService.createPerson(personDTO);
     }
 }

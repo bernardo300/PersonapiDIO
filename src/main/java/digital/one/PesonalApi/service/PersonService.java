@@ -1,6 +1,7 @@
 package digital.one.PesonalApi.service;
 
 import digital.one.PesonalApi.dto.MessageResponseDTO;
+import digital.one.PesonalApi.dto.request.PersonDTO;
 import digital.one.PesonalApi.entity.Person;
 import digital.one.PesonalApi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public MessageResponseDTO createPerson(Person person){
-        Person personSave = this.personRepository.save(person);
+    public MessageResponseDTO createPerson(PersonDTO personDTO){
+        Person personSave = this.personRepository.save(personDTO);
         return MessageResponseDTO
                 .builder()
                 .message("Create person com id " + personSave.getId())
