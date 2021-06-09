@@ -3,6 +3,7 @@ package digital.one.PesonalApi.service;
 import digital.one.PesonalApi.dto.MessageResponseDTO;
 import digital.one.PesonalApi.dto.request.PersonDTO;
 import digital.one.PesonalApi.entity.Person;
+import digital.one.PesonalApi.exception.PersonNotFoundException;
 import digital.one.PesonalApi.mapper.PersonMapper;
 import digital.one.PesonalApi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +41,16 @@ public class PersonService {
         return allPeople.stream()
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
+
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Optional<Person> optionalPerson =  personRepository.findById(id);
+        if (optionalPerson.isEmpty()){
+            throw new PersonNotFoundException(id);
+        }
+
+        return personMapper.toDTO(optionalPerson.get());
 
     }
 }
