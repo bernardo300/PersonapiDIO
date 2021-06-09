@@ -34,4 +34,8 @@ public class PersonController {
     public PersonDTO findByIDyId(@PathVariable Long id) throws PersonNotFoundException {
         return personService.findById(id);
     }
+
+    public void deleteById(Long id) throws PersonNotFoundException {
+        personService.delete(id);
+    }
 }
