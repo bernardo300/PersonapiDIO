@@ -26,7 +26,7 @@ public class PersonService {
         Person personToSave = personMapper.toModel(personDTO);
 
         Person personSave = this.personRepository.save(personToSave);
-        return createMessageResponse(personSave, "Create person com id ");
+        return createMessageResponse(personSave.getId(), "Create person com id ");
     }
 
     public List<PersonDTO> listAll() {
@@ -59,13 +59,13 @@ public class PersonService {
         Person personToUpdate = personMapper.toModel(personDTO);
 
         Person personUpdate = this.personRepository.save(personToUpdate);
-        return createMessageResponse(personUpdate, "Update person com id ");
+        return createMessageResponse(personUpdate.getId(), "Update person com id ");
     }
 
-    private MessageResponseDTO createMessageResponse(Person personUpdate, String s) {
+    private MessageResponseDTO createMessageResponse(Long id, String s) {
         return MessageResponseDTO
                 .builder()
-                .message(s + personUpdate.getId())
+                .message(s + id)
                 .build();
     }
 }
