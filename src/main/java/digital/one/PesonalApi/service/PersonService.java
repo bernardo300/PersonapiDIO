@@ -8,11 +8,8 @@ import digital.one.PesonalApi.mapper.PersonMapper;
 import digital.one.PesonalApi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,10 +26,7 @@ public class PersonService {
         Person personToSave = personMapper.toModel(personDTO);
 
         Person personSave = this.personRepository.save(personToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Create person com id " + personSave.getId())
-                .build();
+        return createMessageResponse(personSave, "Create person com id ");
     }
 
     public List<PersonDTO> listAll() {
@@ -65,9 +59,13 @@ public class PersonService {
         Person personToUpdate = personMapper.toModel(personDTO);
 
         Person personUpdate = this.personRepository.save(personToUpdate);
+        return createMessageResponse(personUpdate, "Update person com id ");
+    }
+
+    private MessageResponseDTO createMessageResponse(Person personUpdate, String s) {
         return MessageResponseDTO
                 .builder()
-                .message("Update person com id " + personUpdate.getId())
+                .message(s + personUpdate.getId())
                 .build();
     }
 }
